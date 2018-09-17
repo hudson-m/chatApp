@@ -1,7 +1,16 @@
+var serverTime = new Date();
+
+function updateTime() {
+    /// Increment serverTime by 1 second and update the html for '#time'
+    serverTime = new Date(serverTime.getTime() + 1000);
+    $('#time').html(serverTime.toGMTString());
+}
+
 $(function(){
     //Realiza conexão
     var socket = io.connect('http://localhost:4200');
-
+    updateTime();
+    setInterval(updateTime, 1000);
     //Botões e inputs
     var message = $("#message");
     var username = $("#username");
@@ -17,7 +26,7 @@ $(function(){
     //listen do new_message
     socket.on("new_message", (data) => {
         console.log(data);
-        chatroom.append("<p class='message'>" + data.username + ":" + data.message + "</p>");
+        chatroom.append("<p class='message'>" + data.username + "("+ serverTime +"):" + data.message + "</p>");
     });
 
     //Criação APelido
