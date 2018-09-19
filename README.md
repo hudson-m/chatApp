@@ -10,6 +10,7 @@ ChatApp used for Sistemas Convergentes's class.
   <li><a href="https://www.npmjs.com/package/body-parser">body-parser</a></li>
   <li><a href="https://www.npmjs.com/package/bootstrap">bootstrap</a></li>
   <li><a href="https://www.npmjs.com/package/connect-mongo">connect-mongo</a></li>
+<li><a href="https://www.npmjs.com/package/socket.io">Socket.io</a></li>
 </ul>  
 <br>
 <a href="https://medium.com/@noufel.gouirhate/build-a-simple-chat-app-with-node-js-and-socket-io-ea716c093088"> Assistant Link - Simple ChatApp with Node</a>
