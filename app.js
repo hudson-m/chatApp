@@ -45,6 +45,14 @@ UserSchema.pre('save', function (next) {
 var User = mongoose.model('User', UserSchema);
 module.exports = User;
 
+// Não salva as informações da sessão, mas sim o ID
+// Tudo é salvo dentro do cookie do navegador
+app.use(session({
+    secret: 'work hard',
+    resave: true,
+    saveUninitialized: false
+  }));
+
 // template engine
 app.set('view engine', 'ejs');
 
