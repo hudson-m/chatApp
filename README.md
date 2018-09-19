@@ -17,3 +17,5 @@ ChatApp used for Sistemas Convergentes's class.
 <a href="https://medium.com/createdd-notes/starting-with-authentication-a-tutorial-with-node-js-and-mongodb-25d524ca0359"> Assistant Link - Authentication tutorial with node and mondb</a>
 <br>
 <a href="https://expressjs.com/en/guide/writing-middleware.html"> Assistant Link - Working with express middleware</a>
+<a href="https://socket.io/get-started/chat/"> Assistant Link - Socket.Io</a>
+
