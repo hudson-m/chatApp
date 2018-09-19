@@ -1,15 +1,37 @@
 const express = require('express');
 const app = express();
-app.use('/public',express.static(__dirname + '/public'));
+var mongoose = require("mongoose")
+var Schema = mongoose.Schema;
+var bodyParser = require("body-parser")
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use('/public', express.static(__dirname + '/public'));
+
+// Banco de dados
+//var conString = "mongodb://hudson:adm9210@ds259912.mlab.com:59912/chatapp"
+var conString = "mongodb://localhost/chatapp"
+app.use(express.static(__dirname))
+
+var Chats = new Schema({
+    message: String,
+    username: { type: String, required: true, unique: true },
+});
+var User = mongoose.model('User', Chats);
+
+mongoose.connect(conString,{ useNewUrlParser: true}, (err) => {
+    console.log("Database connection", conString)
+});
+mongoose.Promise = Promise
 
 // template engine
-app.set('view engine','ejs');
+app.set('view engine', 'ejs');
 
 //middleware
 app.use(express.static('public'));
 
 //routes
-app.get('/', (req,res) => {
+app.get('/', (req, res) => {
     res.render('index');
 });
 
@@ -33,7 +55,13 @@ io.on('connection', (socket) => {
     //listen on new_message
     socket.on('new_message', (data) => {
         //broadcast the new message
-        io.sockets.emit("new_message", {message : data.message, username : socket.username});
+        io.sockets.emit("new_message", { message: data.message, username: socket.username });
     });
 });
 
+// Salvando
+//data.save(function(err) {
+  //  if (err) throw err;
+  
+    //console.log('User created!');
+  //});

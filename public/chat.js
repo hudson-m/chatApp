@@ -35,3 +35,10 @@ $(function(){
         socket.emit('change_username', {username : username.val()})        
     });
 });
+
+// Post request da API
+function postChat(chat) {
+
+    $.post("http://localhost:4200/chats", chat)
+
+}

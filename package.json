@@ -10,8 +10,10 @@
   "author": "hudson machado, alan zequini",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
+    "mongoose": "^5.2.15",
     "nodemon": "^1.18.4",
     "socket.io": "^2.1.1"
   }
