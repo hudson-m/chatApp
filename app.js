@@ -1,28 +1,49 @@
 const express = require('express');
 const app = express();
-var mongoose = require("mongoose")
-var Schema = mongoose.Schema;
 var bodyParser = require("body-parser")
-
+var mongoose = require('mongoose');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use('/public', express.static(__dirname + '/public'));
 
 // Banco de dados
-//var conString = "mongodb://hudson:adm9210@ds259912.mlab.com:59912/chatapp"
-var conString = "mongodb://localhost/chatapp"
-app.use(express.static(__dirname))
-
-var Chats = new Schema({
-    message: String,
-    username: { type: String, required: true, unique: true },
+var UserSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    unique: true,
+    required: true,
+    trim: true
+  },
+  username: {
+    type: String,
+    unique: true,
+    required: true,
+    trim: true
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  passwordConf: {
+    type: String,
+    required: true,
+  }
 });
-var User = mongoose.model('User', Chats);
 
-mongoose.connect(conString,{ useNewUrlParser: true}, (err) => {
-    console.log("Database connection", conString)
-});
-mongoose.Promise = Promise
+//Tranforma senha em hash para quando for para o database
+UserSchema.pre('save', function (next) {
+    var user = this;
+    bcrypt.hash(user.password, 10, function (err, hash){
+      if (err) {
+        return next(err);
+      }
+      user.password = hash;
+      next();
+    })
+  });
+
+var User = mongoose.model('User', UserSchema);
+module.exports = User;
 
 // template engine
 app.set('view engine', 'ejs');
@@ -31,8 +52,30 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 //routes
-app.get('/', (req, res) => {
+app.get('/chat', (req, res) => {
     res.render('index');
+});
+
+app.post('/', (req, res) =>{
+    if (req.body.email &&
+        req.body.username &&
+        req.body.password &&
+        req.body.passwordConf) {
+        var userData = {
+        email: req.body.email,
+        username: req.body.username,
+        password: req.body.password,
+        passwordConf: req.body.passwordConf,
+        }
+        //use schema.create to insert data into the db
+        User.create(userData, function (err, user) {
+        if (err) {
+            return next(err)
+        } else {
+            return res.redirect('/profile');
+        }
+        });
+    }
 });
 
 //Listen on port 4200
