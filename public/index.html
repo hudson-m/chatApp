@@ -1,0 +1,46 @@
+<html>
+
+<head>
+  <title>Watson Sample Chatbot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<!--   <div class="chat_window">
+    <div id="chat"></div>
+    <label for="textInput" class="inputOutline">
+      <input id="textInput" class="input responsive-column" autofocus placeholder="Say something" type="text">
+    </label>
+  </div> -->
+  <div class="chat_window">
+    <div class="top_menu">
+      <div class="title">Chat</div>
+    </div>
+    <ul class="messages"></ul>
+    <div class="bottom_wrapper clearfix">
+      <div class="message_input_wrapper">
+        <input class="message_input" placeholder="Type your message here..." /></div>
+      <div class="send_message">
+        <div class="icon"></div>
+        <div class="text">Send</div>
+      </div>
+    </div>
+  </div>
+  <div class="message_template">
+    <li class="message">
+      <div class="avatar"></div>
+      <div class="text_wrapper">
+        <div class="text"></div>
+      </div>
+    </li>
+  </div>
+  <script src="./script.js"></script>
+</body>
+
+</html>
